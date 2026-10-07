@@ -1,8 +1,9 @@
-[gd_scene format=3 uid="uid://7fxnneaic7or"]
+[gd_scene load_steps=9 format=3 uid="uid://7fxnneaic7or"]
 
 [ext_resource type="Script" uid="uid://dyvas8cud1we6" path="res://Menu/menu/nuevo_menu.gd" id="1_1y37e"]
 [ext_resource type="Theme" uid="uid://md5b72htgblv" path="res://assets/temas/menu.tres" id="2_gdm18"]
 [ext_resource type="FontFile" uid="uid://c163ga11tqgnt" path="res://assets/fuentes/Alkhemikal.ttf" id="3_su57b"]
+[ext_resource type="AudioStream" uid="uid://5cxvsm2xw6cb" path="res://assets/sonidos/zec53-carousel-waltz-slow-circus-loop-1-30-sec-443524.mp3" id="4_gdm18"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xllc5"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -62,5 +63,6 @@ theme_override_font_sizes/font_size = 40
 text = "Salir"
 
 [node name="MusicaMenu" type="AudioStreamPlayer2D" parent="." unique_id=1725704572]
+stream = ExtResource("4_gdm18")
 
 [connection signal="pressed" from="VBoxContainer/iniciar" to="." method="_on_iniciar_pressed"]
