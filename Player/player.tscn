@@ -11,6 +11,10 @@
 [ext_resource type="Script" uid="uid://br7s0nx1jtsr3" path="res://Player/states/Left_thread/Left_thread_hook.gd" id="9_5htga"]
 [ext_resource type="Script" uid="uid://bax55pb103y5d" path="res://Player/states/Left_thread/Left_thread_back.gd" id="10_p5o4e"]
 [ext_resource type="Texture2D" uid="uid://c8psbe1sv5a5t" path="res://assets/character basic/mario-neta.png" id="11_apopc"]
+[ext_resource type="Script" uid="uid://cvtahs8n8gixg" path="res://Player/states/Right_thread/Right_thread_keep.gd" id="12_dkpta"]
+[ext_resource type="Script" uid="uid://8tqadbf0lsu8" path="res://Player/states/Right_thread/Right_thread_shoot.gd" id="13_lfmf2"]
+[ext_resource type="Script" uid="uid://ccpve3gbvb70v" path="res://Player/states/Right_thread/Right_thread_hook.gd" id="14_pisgm"]
+[ext_resource type="Script" uid="uid://do1e1fics1xga" path="res://Player/states/Right_thread/Right_thread_back.gd" id="15_b1ygp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_apopc"]
 atlas = ExtResource("11_apopc")
@@ -84,8 +88,11 @@ script = ExtResource("1_fhl08")
 
 [node name="Left_thread" type="Line2D" parent="." unique_id=277806383]
 points = PackedVector2Array(0, 0, 0, 0)
+width = 3.0
 
 [node name="Right_thread" type="Line2D" parent="." unique_id=1681562481]
+points = PackedVector2Array(0, 0, 0, 0)
+width = 3.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1624869129]
 position = Vector2(1, -4)
@@ -149,9 +156,13 @@ initState = NodePath("Keep")
 metadata/_custom_type_script = "uid://dhwnd7bl1wjgq"
 
 [node name="Keep" type="Node" parent="RT_State_machine" unique_id=817635591]
+script = ExtResource("12_dkpta")
 
 [node name="Shoot" type="Node" parent="RT_State_machine" unique_id=912615580]
+script = ExtResource("13_lfmf2")
 
 [node name="Hook" type="Node" parent="RT_State_machine" unique_id=987751389]
+script = ExtResource("14_pisgm")
 
 [node name="Back" type="Node" parent="RT_State_machine" unique_id=1169617393]
+script = ExtResource("15_b1ygp")
