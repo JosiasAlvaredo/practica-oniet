@@ -9,4 +9,5 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	var direction = player.global_position - global_position
-	velocity = direction	
+	velocity = direction * speed
+	move_and_slide()	

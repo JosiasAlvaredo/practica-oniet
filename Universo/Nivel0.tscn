@@ -12,6 +12,8 @@ radius = 66.37017
 position = Vector2(246, 209)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1877654161]
+rotation = -0.82728606
+ignore_rotation = false
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1208381493]
 position = Vector2(271, 328)
