@@ -7,4 +7,4 @@ func _ready() -> void:
 	get_tree().create_timer(5).timeout.connect(start_menu)
 
 func start_menu():
-	get_tree().change_scene_to_file("res://interface/menu/menu.tscn")
+	get_tree().change_scene_to_file("res://Menu/menu/nuevo menu.tscn")

@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://7fxnneaic7or"]
+
+[ext_resource type="Script" uid="uid://dyvas8cud1we6" path="res://Menu/menu/nuevo_menu.gd" id="1_1y37e"]
+[ext_resource type="Theme" uid="uid://md5b72htgblv" path="res://assets/temas/menu.tres" id="2_gdm18"]
+[ext_resource type="FontFile" uid="uid://c163ga11tqgnt" path="res://assets/fuentes/Alkhemikal.ttf" id="3_su57b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xllc5"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4book"]
+bg_color = Color(0.87058824, 0.6901961, 0.1882353, 0.39215687)
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_da62x"]
+bg_color = Color(0.87058824, 0.87058824, 0.87058824, 0.43529412)
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3jvh8"]
+
+[node name="NuevoMenu4" type="CanvasLayer" unique_id=1988546934]
+script = ExtResource("1_1y37e")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=31759393]
+z_index = 100
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -101.99997
+offset_top = -75.999985
+offset_right = 79.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.1273236, 1.1273236)
+
+[node name="iniciar" type="Button" parent="VBoxContainer" unique_id=1875104643]
+layout_mode = 2
+theme = ExtResource("2_gdm18")
+theme_override_fonts/font = ExtResource("3_su57b")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_xllc5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_4book")
+theme_override_styles/hover = SubResource("StyleBoxFlat_da62x")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3jvh8")
+text = "Iniciar"
+
+[node name="opciones" type="Button" parent="VBoxContainer" unique_id=685089938]
+layout_mode = 2
+theme = ExtResource("2_gdm18")
+theme_override_fonts/font = ExtResource("3_su57b")
+theme_override_font_sizes/font_size = 40
+text = "Opciones"
+
+[node name="salir" type="Button" parent="VBoxContainer" unique_id=540146079]
+layout_mode = 2
+theme = ExtResource("2_gdm18")
+theme_override_fonts/font = ExtResource("3_su57b")
+theme_override_font_sizes/font_size = 40
+text = "Salir"
+
+[node name="MusicaMenu" type="AudioStreamPlayer2D" parent="." unique_id=1725704572]
+
+[connection signal="pressed" from="VBoxContainer/iniciar" to="." method="_on_iniciar_pressed"]

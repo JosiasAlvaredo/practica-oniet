@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://beoaenvhgjpsb"]
+[gd_scene load_steps=7 format=3 uid="uid://sqspju6me24g"]
 
-[ext_resource type="Script" path="res://Menu/intro.gd" id="1_0cim3"]
-[ext_resource type="AudioStream" uid="uid://d7kmcfnt7ld5" path="res://Menu/sondangsirait419-tikus-220067.mp3" id="2_0cim3"]
-[ext_resource type="Texture2D" uid="uid://btmv77f7n57i2" path="res://assets/1000240443.png" id="2_5sjug"]
+[ext_resource type="Script" uid="uid://dow7wp5wo7ts" path="res://Menu/intro.gd" id="1_0cim3"]
+[ext_resource type="AudioStream" uid="uid://63pqn64t7npd" path="res://Menu/sondangsirait419-tikus-220067.mp3" id="2_0cim3"]
+[ext_resource type="Texture2D" uid="uid://cbrkukw62x821" path="res://assets/1000240443.png" id="2_5sjug"]
 
 [sub_resource type="Animation" id="Animation_5sjug"]
 resource_name = "Inicio"
