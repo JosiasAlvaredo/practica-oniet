@@ -1,35 +1,21 @@
 extends State
 
-var aux_velocity=Vector2.ZERO
 var dir_x
 
 func start():
 	controle_node.animated_sprite_2d.play("Jump")
-	controle_node.velocity.y=move_toward(controle_node.velocity.y,-controle_node.jump_force,controle_node.jump_acelerate)
+	controle_node.normal_velocity.y=move_toward(controle_node.normal_velocity.y,-controle_node.jump_force,controle_node.jump_acelerate)
 		
 
 func on_process(delta: float) -> void:
-	dir_x = controle_node.direction.x
-	
-	controle_node.velocity -= aux_velocity
-	
-	aux_velocity = Vector2(
-		move_toward(
-			controle_node.velocity.x,
-			controle_node.speed * dir_x,
-			controle_node.acceleration
-		),
-		0
-	)
-	
-	aux_velocity = aux_velocity.rotated(controle_node.rotation)
-	controle_node.velocity += aux_velocity
-	
-	if controle_node.velocity.y<0:
+	dir_x=controle_node.direction.x
+	controle_node.normal_velocity.x=move_toward(controle_node.normal_velocity.x,controle_node.speed*dir_x,-controle_node.acceleration)
+		
+	if controle_node.normal_velocity.y<0:
 		state_machine.change_to("Fall")
 		
 func on_input(event: InputEvent) -> void:
 	if Input.is_action_pressed("Jump"):
-		controle_node.velocity.y=-100
+		controle_node.normal_velocity.y=-100
 	
 		

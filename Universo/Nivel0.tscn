@@ -25,6 +25,7 @@ position = Vector2(272, 326)
 [node name="CampoGravedad3" parent="." unique_id=1111211250 instance=ExtResource("1_111it")]
 position = Vector2(-315, -444)
 rotation = 0.17122146
+fuerza = 100.0
 
 [node name="CampoGravedad4" parent="." unique_id=458850603 instance=ExtResource("1_111it")]
 position = Vector2(2206, -3640)

@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var fuerza := 1000.0
+@export var fuerza := 300.0
 @onready var antigravity: Area2D = $Antigravity
 
 var objetos = []
@@ -20,8 +20,8 @@ func _physics_process(delta):
 		
 		if objeto.name == "Player":
 			objeto.last_rotation=objeto.rotation
-			objeto.rotation = objeto.global_position.angle_to_point(global_position)-PI/2
-			objeto.gravity=gravedad
+			objeto.rotation = move_toward(objeto.rotation,objeto.global_position.angle_to_point(global_position)-PI/2,10000)
+			objeto.gravity=fuerza
 
 		else:
 			objeto.velocity.y += gravedad * delta
