@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 [gd_scene load_steps=9 format=3 uid="uid://7fxnneaic7or"]
-=======
-[gd_scene format=3 uid="uid://7fxnneaic7or"]
->>>>>>> cfa2f489d9d5a230758c0127ae0011bafe25c37a
 
 [ext_resource type="Script" uid="uid://dyvas8cud1we6" path="res://Menu/menu/nuevo_menu.gd" id="1_1y37e"]
 [ext_resource type="Theme" uid="uid://md5b72htgblv" path="res://assets/temas/menu.tres" id="2_gdm18"]
@@ -70,5 +66,3 @@ text = "Salir"
 stream = ExtResource("4_gdm18")
 
 [connection signal="pressed" from="VBoxContainer/iniciar" to="." method="_on_iniciar_pressed"]
-[connection signal="pressed" from="VBoxContainer/opciones" to="." method="_on_opciones_pressed"]
-[connection signal="pressed" from="VBoxContainer/salir" to="." method="_on_salir_pressed"]
