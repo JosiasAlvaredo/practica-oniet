@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-const OPEN_WIDTH := 0.10
+const OPEN_WIDTH := 0.18
 const CLOSED_WIDTH := 0.5
 
 const NIGHT := Color("14101a")
@@ -85,6 +85,8 @@ func _ready() -> void:
 
 	$VBoxContainer.z_index = 10
 	$VBoxContainer/iniciar.pressed.connect(iniciar_juego)
+	$VBoxContainer/opciones.pressed.connect(_on_opciones_pressed)
+	$VBoxContainer/salir.pressed.connect(_on_salir_pressed)
 
 	var fade := ColorRect.new()
 	fade.color = Color.BLACK
@@ -173,9 +175,6 @@ func crear_fondo() -> void:
 
 
 func crear_cortinas() -> void:
-
-	# Inicialmente completamente cerradas
-
 	cortina_izquierda = Cortina.new()
 	cortina_izquierda.derecha = true
 
@@ -204,7 +203,6 @@ func crear_cortinas() -> void:
 func abrir_telón_inicial() -> void:
 
 	var ancho := get_viewport().get_visible_rect().size.x
-
 	var desplazamiento := ancho * OPEN_WIDTH
 
 	var tween := create_tween()
@@ -212,6 +210,13 @@ func abrir_telón_inicial() -> void:
 	tween.set_parallel(true)
 	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.set_ease(Tween.EASE_IN_OUT)
+
+	tween.tween_property(
+		cortina_izquierda,
+		"offset_left",
+		-desplazamiento,
+		OPEN_TIME
+	)
 
 	tween.tween_property(
 		cortina_izquierda,
@@ -223,6 +228,13 @@ func abrir_telón_inicial() -> void:
 	tween.tween_property(
 		cortina_derecha,
 		"offset_left",
+		desplazamiento,
+		OPEN_TIME
+	)
+
+	tween.tween_property(
+		cortina_derecha,
+		"offset_right",
 		desplazamiento,
 		OPEN_TIME
 	)
@@ -239,11 +251,17 @@ func iniciar_juego() -> void:
 
 	var ancho := get_viewport().get_visible_rect().size.x
 
-	# Cerrar completamente
 	var cerrar := create_tween()
 	cerrar.set_parallel(true)
 	cerrar.set_trans(Tween.TRANS_CUBIC)
 	cerrar.set_ease(Tween.EASE_IN_OUT)
+
+	cerrar.tween_property(
+		cortina_izquierda,
+		"offset_left",
+		0.0,
+		CLOSE_TIME
+	)
 
 	cerrar.tween_property(
 		cortina_izquierda,
@@ -259,18 +277,30 @@ func iniciar_juego() -> void:
 		CLOSE_TIME
 	)
 
+	cerrar.tween_property(
+		cortina_derecha,
+		"offset_right",
+		0.0,
+		CLOSE_TIME
+	)
+
 	await cerrar.finished
 
-	# Ocultar el menú cuando el telón ya está cerrado
 	$VBoxContainer.visible = false
 
-	# Abrir completamente las cortinas
 	var apertura_final := ancho * 0.48
 
 	var abrir := create_tween()
 	abrir.set_parallel(true)
 	abrir.set_trans(Tween.TRANS_CUBIC)
 	abrir.set_ease(Tween.EASE_IN_OUT)
+
+	abrir.tween_property(
+		cortina_izquierda,
+		"offset_left",
+		-apertura_final,
+		1.8
+	)
 
 	abrir.tween_property(
 		cortina_izquierda,
@@ -286,11 +316,17 @@ func iniciar_juego() -> void:
 		1.8
 	)
 
+	abrir.tween_property(
+		cortina_derecha,
+		"offset_right",
+		apertura_final,
+		1.8
+	)
+
 	await abrir.finished
 
 	await get_tree().create_timer(0.25).timeout
 
-	# Fade out a negro
 	var fade := ColorRect.new()
 	fade.color = Color.BLACK
 	fade.modulate.a = 0.0
@@ -319,3 +355,179 @@ func iniciar_juego() -> void:
 	await fade_out.finished
 
 	get_tree().change_scene_to_file("res://game.tscn")
+
+
+func cerrar_telon() -> void:
+	var cerrar := create_tween()
+
+	cerrar.set_parallel(true)
+	cerrar.set_trans(Tween.TRANS_CUBIC)
+	cerrar.set_ease(Tween.EASE_IN_OUT)
+
+	cerrar.tween_property(
+		cortina_izquierda,
+		"offset_left",
+		0.0,
+		CLOSE_TIME
+	)
+
+	cerrar.tween_property(
+		cortina_izquierda,
+		"offset_right",
+		0.0,
+		CLOSE_TIME
+	)
+
+	cerrar.tween_property(
+		cortina_derecha,
+		"offset_left",
+		0.0,
+		CLOSE_TIME
+	)
+
+	cerrar.tween_property(
+		cortina_derecha,
+		"offset_right",
+		0.0,
+		CLOSE_TIME
+	)
+
+	await cerrar.finished
+
+
+func abrir_telon_opciones() -> void:
+	var ancho := get_viewport().get_visible_rect().size.x
+	var desplazamiento := ancho * OPEN_WIDTH
+
+	var abrir := create_tween()
+
+	abrir.set_parallel(true)
+	abrir.set_trans(Tween.TRANS_CUBIC)
+	abrir.set_ease(Tween.EASE_IN_OUT)
+
+	abrir.tween_property(
+		cortina_izquierda,
+		"offset_left",
+		-desplazamiento,
+		OPEN_TIME
+	)
+
+	abrir.tween_property(
+		cortina_izquierda,
+		"offset_right",
+		-desplazamiento,
+		OPEN_TIME
+	)
+
+	abrir.tween_property(
+		cortina_derecha,
+		"offset_left",
+		desplazamiento,
+		OPEN_TIME
+	)
+
+	abrir.tween_property(
+		cortina_derecha,
+		"offset_right",
+		desplazamiento,
+		OPEN_TIME
+	)
+
+	await abrir.finished
+
+func volver_menu() -> void:
+	if animando:
+		return
+
+	animando = true
+
+	var opciones := get_node_or_null("MenuOpciones")
+
+	if opciones:
+		opciones.queue_free()
+
+	await cerrar_telon()
+
+	$VBoxContainer.visible = true
+	$VBoxContainer.mouse_filter = Control.MOUSE_FILTER_STOP
+
+	await abrir_telon_opciones()
+
+	animando = false
+
+func crear_menu_opciones() -> void:
+	var opciones := VBoxContainer.new()
+
+	opciones.name = "MenuOpciones"
+	opciones.set_anchors_preset(Control.PRESET_FULL_RECT)
+	opciones.offset_left = 0
+	opciones.offset_top = 0
+	opciones.offset_right = 0
+	opciones.offset_bottom = 0
+	opciones.alignment = BoxContainer.ALIGNMENT_CENTER
+	opciones.z_index = 10
+
+	add_child(opciones)
+
+	var titulo := Label.new()
+	titulo.text = "OPCIONES"
+	titulo.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	titulo.custom_minimum_size = Vector2(300, 40)
+	opciones.add_child(titulo)
+
+	var volumen := HSlider.new()
+	volumen.name = "Volumen"
+	volumen.custom_minimum_size = Vector2(300, 40)
+	volumen.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	volumen.min_value = -40
+	volumen.max_value = 0
+	volumen.value = $MusicaMenu.volume_db
+	opciones.add_child(volumen)
+
+	var volver := Button.new()
+	volver.text = "Volver"
+	volver.custom_minimum_size = Vector2(200, 45)
+	volver.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	opciones.add_child(volver)
+
+	volver.pressed.connect(volver_menu)
+
+	volumen.value_changed.connect(
+		func(valor: float):
+			$MusicaMenu.volume_db = valor
+	)
+
+
+func _on_opciones_pressed() -> void:
+	if animando:
+		return
+
+	animando = true
+	$VBoxContainer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	await cerrar_telon()
+
+	$VBoxContainer.visible = false
+
+	crear_menu_opciones()
+
+	await abrir_telon_opciones()
+
+	animando = false
+
+
+
+func _on_salir_pressed() -> void:
+	if animando:
+		return
+
+	animando = true
+	$VBoxContainer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	await cerrar_telon()
+
+	await get_tree().create_timer(0.3).timeout
+
+	get_tree().quit()
+	
+	
