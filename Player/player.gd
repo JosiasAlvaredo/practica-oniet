@@ -8,10 +8,10 @@ extends CharacterBody2D
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
-const speed = 300.0
+const speed = 600.0
 const jump_force = 1600.0
 
-const acceleration=50
+const acceleration=100
 const jump_acelerate=400
 const gravity=500
 
@@ -24,8 +24,10 @@ func _physics_process(delta: float) -> void:
 	direction.x = Input.get_axis("Left", "Right")
 	if can_fall:
 		velocity.y+=gravity*delta
+		
 	if direction.x:
 		animated_sprite_2d.scale.x=abs(animated_sprite_2d.scale.x)*direction.x
+	
 	left_area.position=left_thread.get_point_position(1)
 	right_area.position=right_thread.get_point_position(1)
 	
