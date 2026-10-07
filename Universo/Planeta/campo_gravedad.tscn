@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://c3t3i2rvhiec2"]
+
+[ext_resource type="Script" uid="uid://cghg1huu7xn2y" path="res://Universo/Planeta/campo_gravedad.gd" id="1_41ikt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wdile"]
+radius = 297.48615
+
+[node name="CampoGravedad" type="Area2D" unique_id=44581832]
+script = ExtResource("1_41ikt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=485989425]
+shape = SubResource("CircleShape2D_wdile")
+debug_color = Color(0.91964173, 6.709427e-05, 0.6996333, 0.41960785)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
