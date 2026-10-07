@@ -1,5 +1,6 @@
 extends State
 
+var aux_velocity=Vector2.ZERO
 var dir_x
 
 func start():
@@ -8,9 +9,22 @@ func start():
 		
 
 func on_process(delta: float) -> void:
-	dir_x=controle_node.direction.x
-	controle_node.velocity.x=move_toward(controle_node.velocity.x,controle_node.speed*dir_x,-controle_node.acceleration)
-		
+	dir_x = controle_node.direction.x
+	
+	controle_node.velocity -= aux_velocity
+	
+	aux_velocity = Vector2(
+		move_toward(
+			controle_node.velocity.x,
+			controle_node.speed * dir_x,
+			controle_node.acceleration
+		),
+		0
+	)
+	
+	aux_velocity = aux_velocity.rotated(controle_node.rotation)
+	controle_node.velocity += aux_velocity
+	
 	if controle_node.velocity.y<0:
 		state_machine.change_to("Fall")
 		

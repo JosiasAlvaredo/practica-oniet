@@ -106,12 +106,14 @@ shape = SubResource("RectangleShape2D_hvfyp")
 
 [node name="Left_area" type="Area2D" parent="." unique_id=1056409606]
 collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Left_area" unique_id=1177090239]
 shape = SubResource("CircleShape2D_x3vf3")
 
-[node name="Right_area" type="Area2D" parent="." unique_id=1831929392]
+[node name="Right_area" type="Area2D" parent="." unique_id=1831929392 groups=["player"]]
 collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Right_area" unique_id=1274703230]
 shape = SubResource("CircleShape2D_x3vf3")

@@ -3,34 +3,32 @@
 [ext_resource type="PackedScene" uid="uid://c3t3i2rvhiec2" path="res://Universo/Planeta/campo_gravedad.tscn" id="1_111it"]
 [ext_resource type="PackedScene" uid="uid://wo6oa5tompp8" path="res://Player/player.tscn" id="1_qvwty"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_qvwty"]
-radius = 66.37017
-
 [node name="Nivel0" type="Node2D" unique_id=1161981074]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1328820473]
+offset_left = -55.0
+offset_top = 178.0
+offset_right = -15.0
+offset_bottom = 218.0
 
 [node name="Player" parent="." unique_id=493818207 instance=ExtResource("1_qvwty")]
 position = Vector2(246, 209)
+collision_layer = 1
+collision_mask = 2
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1877654161]
+ignore_rotation = false
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1208381493]
-position = Vector2(271, 328)
-collision_layer = 2
-collision_mask = 2
+[node name="CampoGravedad2" parent="." unique_id=44581832 instance=ExtResource("1_111it")]
+position = Vector2(272, 326)
 
-[node name="CampoGravedad" parent="StaticBody2D" unique_id=44581832 instance=ExtResource("1_111it")]
-position = Vector2(1, -2)
+[node name="CampoGravedad3" parent="." unique_id=1111211250 instance=ExtResource("1_111it")]
+position = Vector2(-315, -444)
+rotation = 0.17122146
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1804460464]
-shape = SubResource("CircleShape2D_qvwty")
+[node name="CampoGravedad4" parent="." unique_id=458850603 instance=ExtResource("1_111it")]
+position = Vector2(2206, -3640)
+scale = Vector2(10.79664, 10.57186)
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=975619199]
-position = Vector2(733, 158)
-collision_layer = 2
-collision_mask = 2
-
-[node name="CampoGravedad" parent="StaticBody2D2" unique_id=1629418612 instance=ExtResource("1_111it")]
-position = Vector2(1, -2)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=29961248]
-shape = SubResource("CircleShape2D_qvwty")
+[node name="CampoGravedad" parent="." unique_id=1629418612 instance=ExtResource("1_111it")]
+position = Vector2(734, 156)

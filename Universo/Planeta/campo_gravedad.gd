@@ -1,6 +1,7 @@
 extends Area2D
 
-@export var fuerza := 500.0
+@export var fuerza := 1000.0
+@onready var antigravity: Area2D = $Antigravity
 
 var objetos = []
 
@@ -14,10 +15,16 @@ func _physics_process(delta):
 
 		if distancia <= 1:
 			continue
-
+		
 		var gravedad = direccion.normalized() * fuerza
+		
+		if objeto.name == "Player":
+			objeto.last_rotation=objeto.rotation
+			objeto.rotation = objeto.global_position.angle_to_point(global_position)-PI/2
+			objeto.gravity=gravedad
 
-		objeto.velocity += gravedad * delta
+		else:
+			objeto.velocity.y += gravedad * delta
 
 func _on_body_entered(body):
 	if body not in objetos:

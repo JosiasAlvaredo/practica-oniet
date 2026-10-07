@@ -5,6 +5,12 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_wdile"]
 radius = 297.48615
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_41ikt"]
+radius = 66.37017
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yfd7w"]
+radius = 68.0
+
 [node name="CampoGravedad" type="Area2D" unique_id=44581832]
 script = ExtResource("1_41ikt")
 
@@ -12,5 +18,25 @@ script = ExtResource("1_41ikt")
 shape = SubResource("CircleShape2D_wdile")
 debug_color = Color(0.91964173, 6.709427e-05, 0.6996333, 0.41960785)
 
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1357290083]
+position = Vector2(-1, 2)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=2021039067]
+shape = SubResource("CircleShape2D_41ikt")
+
+[node name="Antigravity" type="Area2D" parent="." unique_id=657055554]
+position = Vector2(-1, 1)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Antigravity" unique_id=870258435]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_yfd7w")
+debug_color = Color(0.48117518, 0.5872158, 0, 0.41960785)
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="body_entered" from="Antigravity" to="." method="_on_antigravity_body_entered"]
+[connection signal="body_exited" from="Antigravity" to="." method="_on_antigravity_body_exited"]

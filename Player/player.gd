@@ -13,17 +13,25 @@ const jump_force = 1600.0
 
 const acceleration=100
 const jump_acelerate=400
-const gravity=500
+var gravity=Vector2i.ZERO
+
+var last_rotation
 
 var can_fall=true
 
 var direction=Vector2i.ZERO
 
 
+
+func _ready() -> void:
+	last_rotation=rotation
 func _physics_process(delta: float) -> void:
 	direction.x = Input.get_axis("Left", "Right")
-	if can_fall:
-		velocity.y+=gravity*delta
+	if last_rotation!=rotation:
+		velocity -= (gravity*Vector2.ONE).rotated(rotation)
+	
+	velocity += (gravity*Vector2.ONE).rotated(rotation)
+	
 		
 	if direction.x:
 		animated_sprite_2d.scale.x=abs(animated_sprite_2d.scale.x)*direction.x
